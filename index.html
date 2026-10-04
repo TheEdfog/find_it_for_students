@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#003da5" />
+    <meta name="description" content="A quick technology crossword from P&G IT. Solve the clues and claim a prize." />
+    <title>P&G IT Tech Grid — Student Challenge</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='20' fill='%23003da5'/%3E%3Cpath d='M11 11h7v7h-7zm11 0h7v7h-7zM11 22h7v7h-7zm11 0h7v7h-7z' fill='white'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <div class="top-ribbon" aria-hidden="true"></div>
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand-lockup" href="#" aria-label="P&G IT student challenge">
+          <img class="pg-logo" src="https://images.ctfassets.net/oggad6svuzkv/2SOZEas4SqpVmjiWuKzyJ6/d61c0965cff5f316eb62e85c74a44466/P_G_Logo_RGB.svg" alt="P&G" width="48" height="48" />
+          <span class="brand-divider" aria-hidden="true"></span>
+          <span class="brand-name">IT <small>STUDENT CHALLENGE</small></span>
+        </a>
+        <span class="event-pill"><span class="event-dot" aria-hidden="true"></span> QUICK CHALLENGE</span>
+      </header>
+
+      <main class="experience">
+        <section class="intro" aria-labelledby="page-title">
+          <p class="eyebrow"><span aria-hidden="true">P&amp;G IT</span> <span class="eyebrow-separator">/</span> YOUR TURN</p>
+          <h1 id="page-title">Ready to crack<br /><span>the Tech Grid?</span></h1>
+          <p class="intro-copy">Five quick clues. One little brain workout. Get every word right and show us your win.</p>
+          <div class="intro-bubble" aria-hidden="true"><span>THINK</span><b>+</b><span>TECH</span></div>
+        </section>
+
+        <section class="game-card" aria-label="Tech crossword challenge">
+          <div class="card-top">
+            <div>
+              <p class="card-kicker">THE CHALLENGE <span aria-hidden="true">01</span></p>
+              <h2>Tech essentials</h2>
+            </div>
+            <div class="word-count"><strong>5</strong><span>CLUES</span></div>
+          </div>
+
+          <div class="puzzle-area">
+            <div class="board-wrap">
+              <div id="board" class="board" role="grid" aria-label="Technology crossword grid"></div>
+            </div>
+
+            <section class="clue-card" aria-label="Current clue">
+              <div class="clue-card-top">
+                <span id="clue-label" class="clue-label">1 ACROSS</span>
+                <span id="clue-count" class="clue-count">CLUE 1 OF 5</span>
+              </div>
+              <p id="current-clue" class="current-clue">A fast storage layer that keeps frequently used data close.</p>
+              <div class="clue-controls">
+                <button id="previous-clue" class="clue-arrow" type="button" aria-label="Previous clue">←</button>
+                <span id="answer-length" class="answer-length">5 LETTERS</span>
+                <button id="next-clue" class="clue-arrow" type="button" aria-label="Next clue">→</button>
+              </div>
+            </section>
+          </div>
+
+          <div class="game-actions">
+            <p id="status" class="status" role="status" aria-live="polite">Tap a square and type a letter. Use the arrows to move between clues.</p>
+            <div class="actions">
+              <button id="reset-button" class="reset-button" type="button">Start over</button>
+              <button id="check-button" class="check-button" type="button">Check answers <span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="page-footer">
+        <span>BUILT FOR CURIOUS MINDS</span>
+        <span class="footer-rule" aria-hidden="true"></span>
+        <span>P&amp;G IT</span>
+      </footer>
+    </div>
+  </body>
+</html>
