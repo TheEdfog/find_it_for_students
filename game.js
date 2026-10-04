@@ -216,12 +216,19 @@ function checkAnswers() {
     return;
   }
   if (!allCorrect) {
-    for (const [key, cell] of cells) {
-      const expected = entries.flatMap(entry => Array.from(entry.answer, (letter, index) => ({ entry, letter, index })))
-        .find(({ entry, index }) => { const p = position(entry, index); return keyFor(p.row, p.col) === key; }).letter;
-      cell.parentElement.classList.add(letters.get(key) === expected ? 'correct' : 'incorrect');
+    for (const entry of entries) {
+      const word = Array.from(entry.answer, (_, index) => {
+        const { row, col } = position(entry, index);
+        return letters.get(keyFor(row, col));
+      }).join('');
+      if (word === entry.answer) continue;
+
+      for (let index = 0; index < entry.answer.length; index += 1) {
+        const { row, col } = position(entry, index);
+        cells.get(keyFor(row, col)).parentElement.classList.add('incorrect');
+      }
     }
-    status.textContent = 'Not quite — try the red squares again.';
+    status.textContent = 'Not quite — review the highlighted word(s).';
     status.className = 'status error';
     return;
   }
