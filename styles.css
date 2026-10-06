@@ -154,3 +154,36 @@ button:focus-visible { outline: 3px solid var(--pg-cyan); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+/* Mobile word-entry experience */
+.clue-picker-label,.word-input-label { display:block; font-size:12px; font-weight:700; margin:0 0 8px; color:var(--pg-blue); }
+.word-input-label span { font-weight:400; color:var(--muted); }
+#clue-picker { width:100%; min-height:48px; padding:10px; border:1px solid #b6d8e8; border-radius:8px; background:white; color:var(--pg-blue); font:inherit; font-size:16px; margin-bottom:16px; }
+#word-input { width:100%; min-height:54px; padding:12px; border:2px solid #83b9db; border-radius:10px; font-size:20px; font-weight:700; color:var(--pg-blue); background:white; text-transform:uppercase; }
+#word-input:focus { outline:3px solid #00a3e044; border-color:var(--pg-blue); }
+#progress { color:var(--muted); font-size:12px; margin:10px 0 16px; }
+@media(max-width:900px) {
+ .experience { display:block; padding-top:20px; }
+ .intro { margin-bottom:18px; }
+ .intro h1 { font-size:30px; }
+ .intro h1 br { display:none; }
+ .intro-copy { font-size:13px; }
+ .eyebrow { display:none; }
+ .game-card { width:100%; }
+ .puzzle-area { display:flex; flex-direction:column; align-items:stretch; }
+ .clue-card { order:-1; display:block; padding:16px; }
+ .current-clue { min-height:0; font-size:15px; line-height:1.55; margin:12px 0 18px; }
+ .clue-controls { display:flex; justify-content:space-between; margin:0; }
+ .clue-arrow { width:52px; height:48px; border-radius:10px; }
+ .answer-length { display:block; font-size:11px; }
+ .board { width:min(100%,420px); gap:2px; }
+ .board-wrap { padding:12px 0 4px; }
+ .cell { font-size:16px; }
+ .game-actions { display:flex; flex-direction:column; align-items:stretch; }
+ .status { font-size:12px; }
+ .actions { justify-content:space-between; }
+ .check-button { flex:1; font-size:14px; min-height:52px; }
+ .reset-button { padding:12px; font-size:12px; }
+ .event-pill { display:none; }
+ .card-top { padding:14px 16px; }
+}
