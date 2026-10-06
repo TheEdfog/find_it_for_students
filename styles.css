@@ -50,8 +50,8 @@ h2 { margin: 0; color: var(--pg-blue); font-size: 21px; line-height: 1.2; font-w
 .word-count span { margin-top: 3px; font-size: 6px; font-weight: 700; letter-spacing: .1em; }
 .puzzle-area { display: grid; grid-template-columns: minmax(240px, .9fr) minmax(220px, 1.1fr); gap: 24px; align-items: center; padding: 22px 26px 21px; }
 .board-wrap { min-width: 0; display: flex; justify-content: center; }
-.board { display: grid; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 4px; width: min(100%, 320px); }
-.cell-wrap, .block { position: relative; aspect-ratio: 1; min-width: 0; border-radius: 6px; }
+.board { display: grid; grid-template-columns: repeat(14, minmax(0, 1fr)); gap: 3px; width: min(100%, 360px); }
+.cell-wrap, .block { position: relative; aspect-ratio: 1; min-width: 0; border-radius: 4px; }
 .block { background: transparent; }
 .cell-wrap { border: 1px solid #a9bfd8; background: #fff; transition: background .12s, border-color .12s; }
 .cell-wrap.selected-entry { border-color: #56b5dc; background: var(--pg-cyan-pale); }
@@ -70,7 +70,7 @@ h2 { margin: 0; color: var(--pg-blue); font-size: 21px; line-height: 1.2; font-w
   outline: none !important;
   box-shadow: none !important;
 }
-.cell-number { position: absolute; z-index: 1; top: 2px; left: 3px; color: #506580; font-size: 7px; line-height: 1; font-weight: 600; pointer-events: none; }
+.cell-number { position: absolute; z-index: 1; top: 1px; left: 2px; color: #506580; font-size: 6px; line-height: 1; font-weight: 600; pointer-events: none; }
 .clue-card { min-width: 0; padding: 16px; border-radius: 13px; background: #f0f7fc; }
 .clue-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .clue-label { color: var(--pg-blue); font-size: 9px; font-weight: 800; }
@@ -124,7 +124,7 @@ button:focus-visible { outline: 3px solid var(--pg-cyan); outline-offset: 3px; }
   .word-count { width: 38px; height: 38px; }
   .puzzle-area { grid-template-columns: 1fr; gap: 13px; padding: 14px 12px 13px; }
   .board { width: min(100%, 360px); gap: 3px; }
-  .cell-wrap, .block { border-radius: 5px; }
+  .cell-wrap, .block { border-radius: 3px; }
   .cell { padding-top: 6px; font-size: clamp(15px, 5vw, 20px); }
   .cell-number { top: 2px; left: 3px; font-size: 7px; }
   .clue-card { display: grid; grid-template-columns: 1fr auto; column-gap: 12px; align-items: center; padding: 11px 12px; border-radius: 11px; }
