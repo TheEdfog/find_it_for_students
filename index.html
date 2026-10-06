@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20261006-final" />
-    <script src="game.js?v=20261006-final" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261006-mobile" />
+    <script src="game.js?v=20261006-mobile" defer></script>
   </head>
   <body>
     <div class="top-ribbon" aria-hidden="true"></div>
@@ -48,12 +48,12 @@
             </div>
 
             <section class="clue-card" aria-label="Current clue">
-              <div class="clue-card-top">
+              <label class="clue-picker-label" for="clue-picker">Choose a clue</label><select id="clue-picker" aria-label="Choose a clue"></select><div class="clue-card-top">
                 <span id="clue-label" class="clue-label">1 ACROSS</span>
                 <span id="clue-count" class="clue-count">CLUE 1 OF 5</span>
               </div>
               <p id="current-clue" class="current-clue">A fast storage layer that keeps frequently used data close.</p>
-              <div class="clue-controls">
+              <label class="word-input-label" for="word-input">Your answer <span>(letters only, no spaces)</span></label><input id="word-input" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Type the brand…" aria-describedby="current-clue" /><p id="progress" aria-live="polite"></p><div class="clue-controls">
                 <button id="previous-clue" class="clue-arrow" type="button" aria-label="Previous clue">←</button>
                 <span id="answer-length" class="answer-length">5 LETTERS</span>
                 <button id="next-clue" class="clue-arrow" type="button" aria-label="Next clue">→</button>
@@ -62,7 +62,7 @@
           </div>
 
           <div class="game-actions">
-            <p id="status" class="status" role="status" aria-live="polite">Choose a clue, tap a square and type. Use the arrows to move between clues.</p>
+            <p id="status" class="status" role="status" aria-live="polite">Type a brand above. Your progress is saved on this device.</p>
             <div class="actions">
               <button id="reset-button" class="reset-button" type="button">Start over</button>
               <button id="check-button" class="check-button" type="button">Check answers <span aria-hidden="true">→</span></button>
