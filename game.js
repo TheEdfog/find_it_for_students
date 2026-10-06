@@ -114,6 +114,7 @@ function selectEntry(entry, index = 0, focus = true) {
   document.querySelector('#current-clue').textContent = entry.clue;
   document.querySelector('#answer-length').textContent = entry.answer.length + ' LETTERS';
   paintSelection();
+  syncWordInput(true);
   if (focus) focusActiveCell();
 }
 
@@ -137,6 +138,12 @@ function paintSelection() {
 }
 
 function focusActiveCell() {
+  if (typeof matchMedia === 'function' && matchMedia('(max-width: 900px)').matches) {
+    const input = document.querySelector('#word-input');
+    input.focus({ preventScroll: true });
+    input.select();
+    return;
+  }
   const { row, col } = position(activeEntry, activeIndex);
   const cell = cells.get(keyFor(row, col));
   if (cell) cell.focus();
@@ -158,6 +165,8 @@ function setLetter(value) {
   focusActiveCell();
   status.textContent = 'Keep going — every crossing is a clue.';
   status.className = 'status';
+  syncWordInput(true);
+  saveProgress();
 }
 
 function clearLetter(moveBack = false) {
@@ -175,6 +184,8 @@ function clearLetter(moveBack = false) {
   cells.get(key).parentElement.classList.remove('correct');
   paintSelection();
   focusActiveCell();
+  syncWordInput(true);
+  saveProgress();
 }
 
 function handleCellInput(event) {
@@ -246,6 +257,8 @@ function checkAnswers() {
     return;
   }
   finished = true;
+  for (const cell of cells.values()) cell.readOnly = true;
+  document.querySelector('#word-input').readOnly = true;
   status.textContent = 'You cracked it! Show this screen to the P&G team to claim your prize.';
   status.className = 'status success';
   document.querySelectorAll('.cell-wrap').forEach(wrapper => wrapper.classList.add('correct'));
@@ -253,14 +266,17 @@ function checkAnswers() {
 
 function resetPuzzle() {
   finished = false;
+  document.querySelector('#word-input').readOnly = false;
   for (const [key, cell] of cells) {
     letters.set(key, '');
     cell.value = '';
+    cell.readOnly = false;
     cell.parentElement.classList.remove('incorrect', 'correct');
   }
   status.textContent = 'Choose a clue, tap a square and type. Use the arrows to move between clues.';
   status.className = 'status';
   selectEntry(entries[0]);
+  saveProgress();
 }
 
 function moveClue(step) {
@@ -271,5 +287,66 @@ function moveClue(step) {
 document.querySelector('#previous-clue').addEventListener('click', () => moveClue(-1));
 document.querySelector('#next-clue').addEventListener('click', () => moveClue(1));
 document.querySelector('#check-button').addEventListener('click', checkAnswers);
-document.querySelector('#reset-button').addEventListener('click', resetPuzzle);
+document.querySelector('#reset-button').addEventListener('click', () => { if (![...letters.values()].some(Boolean) || confirm('Clear all your answers and start again?')) resetPuzzle(); });
+
+const wordInput = document.querySelector('#word-input');
+const cluePicker = document.querySelector('#clue-picker');
+for (const entry of entries) {
+  const option = document.createElement('option');
+  option.value = entry.number;
+  option.textContent = entry.number + ' · ' + entry.direction + ' · ' + entry.answer.length + ' letters';
+  cluePicker.append(option);
+}
+cluePicker.addEventListener('change', () => selectEntry(entries.find(entry => entry.number === Number(cluePicker.value))));
+wordInput.addEventListener('focus', () => wordInput.select());
+wordInput.addEventListener('input', () => {
+  if (finished) return;
+  const cursor = wordInput.selectionStart;
+  const raw = wordInput.value;
+  const value = raw.toUpperCase().replace(/[^A-Z_]/g, '').slice(0, activeEntry.answer.length);
+  wordInput.value = value;
+  for (let i = 0; i < activeEntry.answer.length; i++) {
+    const p = position(activeEntry, i);
+    const key = keyFor(p.row, p.col);
+    const letter = value[i] && value[i] !== '_' ? value[i] : '';
+    letters.set(key, letter);
+    cells.get(key).value = letter;
+  }
+  clearIncorrect();
+  status.textContent = 'Your progress is saved. Check when all the squares are filled.';
+  status.className = 'status';
+  const nextCursor = raw.slice(0, cursor).replace(/[^a-zA-Z_]/g, '').length;
+  wordInput.setSelectionRange(nextCursor, nextCursor);
+  saveProgress();
+});
+wordInput.addEventListener('keydown', event => {
+  if (event.key === 'Enter') { event.preventDefault(); moveClue(1); }
+});
+function syncWordInput(force = false) {
+  const input = document.querySelector('#word-input');
+  if (!force && document.activeElement === input) return;
+  input.maxLength = activeEntry.answer.length;
+  input.value = Array.from(activeEntry.answer, (_, i) => {
+    const p = position(activeEntry, i);
+    return letters.get(keyFor(p.row, p.col)) || '_';
+  }).join('');
+  document.querySelector('#clue-picker').value = activeEntry.number;
+  updateProgress();
+}
+function updateProgress() {
+  const count = [...letters.values()].filter(Boolean).length;
+  document.querySelector('#progress').textContent = count + ' / ' + letters.size + ' squares filled';
+}
+function saveProgress() {
+  updateProgress();
+  try { localStorage.setItem('pg-product-grid-v1', JSON.stringify([...letters])); } catch (_) {}
+}
 buildPuzzle();
+try {
+  const saved = JSON.parse(localStorage.getItem('pg-product-grid-v1') || '[]');
+  for (const [key, value] of saved) {
+    if (cells.has(key) && /^[A-Z]$/.test(value)) { letters.set(key, value); cells.get(key).value = value; }
+  }
+} catch (_) {}
+syncWordInput(true);
+
