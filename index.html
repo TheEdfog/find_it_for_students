@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20261006-visual" />
-    <script src="game.js?v=20261006-visual" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20261006-compact" />
+    <script src="game.js?v=20261006-compact" defer></script>
   </head>
   <body>
     <div class="top-ribbon" aria-hidden="true"></div>
@@ -28,7 +28,7 @@
       <main class="experience">
         <section class="intro" aria-labelledby="page-title">
           <p class="eyebrow"><span aria-hidden="true">P&amp;G IT</span> <span class="eyebrow-separator">/</span> YOUR TURN</p>
-          <h1 id="page-title">Ready to solve<br /><span>the Product Grid?</span></h1>
+          <h1 id="page-title">Ready to solve <br /><span>the Product Grid?</span></h1>
           <p class="intro-copy">15 clues. 15 everyday brands. Fill the crossword, then check your answers.</p>
           <div class="intro-bubble" aria-hidden="true"><span>THINK</span><b>+</b><span>TECH</span></div>
         </section>
@@ -43,16 +43,14 @@
           </div>
 
           <div class="puzzle-area">
-            <div class="board-wrap">
-              <div id="board" class="board" role="grid" aria-label="P&amp;G product crossword grid"></div>
-            </div>
+
 
             <section class="clue-card" aria-label="Current clue">
               <label class="clue-picker-label" for="clue-picker">Choose a clue</label><select id="clue-picker" aria-label="Choose a clue"></select><div class="clue-card-top">
-                <span id="clue-label" class="clue-label">1 ACROSS</span>
-                <span id="clue-count" class="clue-count">CLUE 1 OF 5</span>
+                <span id="clue-label" class="clue-label">1 DOWN</span>
+                <span id="clue-count" class="clue-count">CLUE 1 OF 15</span>
               </div>
-              <p id="current-clue" class="current-clue">A fast storage layer that keeps frequently used data close.</p>
+              <p id="current-clue" class="current-clue">A single drop of this green liquid cuts through impossible grease for sparkling dishes.</p>
               <label class="word-input-label" for="word-input">Your answer <span>(letters only, no spaces)</span></label><input id="word-input" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Type the brand…" aria-describedby="current-clue" /><p id="progress" aria-live="polite"></p><div class="clue-controls">
                 <button id="previous-clue" class="clue-arrow" type="button" aria-label="Previous clue">←</button>
                 <span id="answer-length" class="answer-length">5 LETTERS</span>
@@ -68,6 +66,12 @@
               <button id="check-button" class="check-button" type="button">Check answers <span aria-hidden="true">→</span></button>
             </div>
           </div>
+          <details class="grid-details">
+            <summary><span class="grid-show">Show crossword grid</span><span class="grid-hide">Hide crossword grid</span></summary>
+            <div class="board-wrap">
+              <div id="board" class="board" role="grid" aria-label="P&amp;G product crossword grid"></div>
+            </div>
+          </details>
         </section>
       </main>
 
