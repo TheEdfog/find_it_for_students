@@ -187,3 +187,7 @@ button:focus-visible { outline: 3px solid var(--pg-cyan); outline-offset: 3px; }
  .event-pill { display:none; }
  .card-top { padding:14px 16px; }
 }
+
+/* Keep letters inside compact overview cells at every screen width. */
+.cell-wrap { container-type: inline-size; }
+.cell { font-size: clamp(8px, 60cqw, 18px); padding: 4px 0 0; line-height: 1; }
