@@ -138,7 +138,7 @@ function paintSelection() {
 }
 
 function focusActiveCell() {
-  if (typeof matchMedia === 'function' && matchMedia('(max-width: 900px)').matches) {
+  if ((document.querySelector('.grid-details') && !document.querySelector('.grid-details').open) || (typeof matchMedia === 'function' && matchMedia('(max-width: 900px)').matches)) {
     const input = document.querySelector('#word-input');
     input.focus({ preventScroll: true });
     input.select();
